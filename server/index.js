@@ -1,14 +1,20 @@
-const express = require('express')
-const app = express()
-const port = 4000
+"use strict";
 
-app.get('/test', (req, res) => {
-    res.status(200).json({
-        status : 200,
-        data: "Hello World!"
+const express = require("express");
+const {
+    getAllchallenges,
+} = require("./apihandlers");
+
+express()
+    .use(express.json())
+    .use(express.static("public"))
+
+
+    .get("/challengelist", getAllchallenges)
+
+
+    .get("*", (req, res) => {
+        res.status(404).json({status: 404, message: "Not what your looking for!"});
     })
-})
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+    .listen(4000, () => console.log("Listening on port 4000"));

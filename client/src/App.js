@@ -1,19 +1,18 @@
-import {useEffect} from "react"
+//import {useEffect} from "react"
+import React from "react";
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
-function App() {
+import Homepage from "./Homepage"
 
-useEffect(() => {
-  fetch("/test").then((res) => res.json()).then((data) => {
-    console.log(data)
-  })
-},[])
-
+const App = () => {
 
 
   return (
-    <div >
-        <p>Howdy!</p>
-    </div>
+  <BrowserRouter>
+    <Routes>
+        <Route path="/" element={<Homepage/>}/>
+    </Routes>
+  </BrowserRouter>
   );
 }
 
