@@ -28,7 +28,7 @@ const Homepage = () => {
 
 const Page = styled.div`
 background: #222;
-height: 100vh;
+height: 94vh;
 `
 
 const Divider = styled.div`
