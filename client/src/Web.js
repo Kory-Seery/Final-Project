@@ -7,14 +7,14 @@ const Web = () => {
     return (
 <ALL>
 
-    <Sections>
+    <Section1>
         <p>The list</p>
-    </Sections>
+    </Section1>
 
 
-    <Sections>
+    <Section2>
         <p>THE SITE</p>
-    </Sections>
+    </Section2>
 
 
 
@@ -28,10 +28,15 @@ export default Web;
 const ALL = styled.div`
 display: grid;
 grid-template-columns: auto auto;
+height: 94vh;
 `
 
 
-const Sections = styled.div`
+const Section1 = styled.div`
+background-color: lightgray;
 
+`
+
+const Section2 = styled.div`
 
 `
