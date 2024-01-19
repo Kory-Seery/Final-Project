@@ -22,11 +22,11 @@ const Signin = () => {
     <Footer>
 
         <div className="glow-on-hover" type="button" >
-            <BUTTON type = "reset">Clear</BUTTON>
+            <Buttonstyle type = "reset">Clear</Buttonstyle>
         </div>
         
         <div className="glow-on-hover" type="button" >
-            <GOTO to="/Web"><BUTTON>Confirm</BUTTON></GOTO>
+            <GOTO to="/Web">Confirm</GOTO>
         </div>
 
     </Footer>
@@ -38,22 +38,44 @@ const Signin = () => {
 export default Signin
 
 
-const BUTTON = styled.button`
+/*const BUTTON = styled.button`
 display: flex;
 justify-content: center;
 background: transparent;
 border: none;
+padding: 0px;
+padding-left: 15%;
+font-size: 40px;
+font-family: 'FROZEN ICE', sans-serif;
+color: white;
+`*/
+
+const Buttonstyle = styled.button`
+display: flex;
+justify-content: center;
+text-decoration: none;
 padding: 8px;
+padding-left: 70px;
+padding-right: 70px;
+border: none;
 font-size: 30px;
 font-family: 'FROZEN ICE', sans-serif;
 color: white;
+background: transparent;
 `
+
 const Footer = styled.div`
 display: flex;
 `
 
 const GOTO = styled(Link)`
+display: flex;
+justify-content: center;
 text-decoration: none;
+padding: 8px;
+font-size: 30px;
+font-family: 'FROZEN ICE', sans-serif;
+color: white;
 `
 
 const Wrapper = styled.div`
