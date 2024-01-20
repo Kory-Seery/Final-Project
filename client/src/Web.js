@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Countdown from "./Countdown";
 
 
 
@@ -9,6 +10,7 @@ const Web = () => {
 
     <Section1>
         <p>The list</p>
+        <Countdown />
     </Section1>
 
 
@@ -29,10 +31,12 @@ const ALL = styled.div`
 display: grid;
 grid-template-columns: auto auto;
 height: 94vh;
+
 `
 
 
 const Section1 = styled.div`
+width: 400px;
 background-color: lightgray;
 
 `

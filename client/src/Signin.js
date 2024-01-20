@@ -64,7 +64,7 @@ color: white;
 background: transparent;
 `
 
-const Footer = styled.div`
+const Footer = styled.footer`
 display: flex;
 `
 
