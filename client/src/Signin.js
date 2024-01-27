@@ -1,85 +1,103 @@
-import styled from "styled-components"
-import { Link } from "react-router-dom"
-
-
+import styled from "styled-components";
+import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 
 const Signin = () => {
+    const navigate = useNavigate()
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const handleSignIn = async (event) => {
+        event.preventDefault()
+    try {
+        const response = await fetch("/clientsignin", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+        });
+        if (response.ok) {
+        localStorage.setItem("currentUser", username);
+        setErrorMessage(null);
+        navigate("/Web")
+        } else {
+            
+        setErrorMessage("Invalid username or password");
+        }
+    } catch (error) {
+        console.error("Error during sign-in:", error);
+        setErrorMessage("An error occurred during sign-in");
+    }
+    };
+
     return (
     <Wrapper>
-    <form>
+        <form>
         <div>
             <h1>Sign-in</h1>
         </div>
-    <div>
         <div>
-            <p>Nickname: <input type = "text" id = "nickname" required/></p>
+            <p>
+            Nickname:{" "}
+            <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
+            </p>
         </div>
         <div>
-            <p>Password: <input class = "test" type = "password" id = "password" required/></p>
+            <p>
+            Password:{" "}
+            <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            </p>
         </div>
-    </div>
-
-    <Footer>
-
-        <div className="glow-on-hover" type="button" >
-            <Buttonstyle type = "reset">Clear</Buttonstyle>
-        </div>
-        
-        <div className="glow-on-hover" type="button" >
-            <GOTO to="/Web">Confirm</GOTO>
-        </div>
-
-    </Footer>
-    </form>
-        </Wrapper>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+        <Footer>
+            <div className="glow-on-hover" type="button">
+            <Buttonstyle type="reset">Clear</Buttonstyle>
+            </div>
+            <div className="glow-on-hover" type="button">
+            <Buttonstyle onClick={(event) => handleSignIn(event)}>Confirm</Buttonstyle>
+            </div>
+        </Footer>
+        </form>
+    </Wrapper>
     );
-}
+};
 
-export default Signin
-
-
-/*const BUTTON = styled.button`
-display: flex;
-justify-content: center;
-background: transparent;
-border: none;
-padding: 0px;
-padding-left: 15%;
-font-size: 40px;
-font-family: 'FROZEN ICE', sans-serif;
-color: white;
-`*/
-
-const Buttonstyle = styled.button`
-display: flex;
-justify-content: center;
-text-decoration: none;
-padding: 8px;
-padding-left: 70px;
-padding-right: 70px;
-border: none;
-font-size: 30px;
-font-family: 'FROZEN ICE', sans-serif;
-color: white;
-background: transparent;
+const BUTTON = styled.button`
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0px;
+    padding-left: 15%;
+    font-size: 40px;
+    font-family: 'FROZEN ICE', sans-serif;
+    color: white;
+`
+const Buttonstyle = styled(BUTTON)`
+    padding-left: 70px;
+    padding-right: 70px;
 `
 
 const Footer = styled.footer`
-display: flex;
+    display: flex;
 `
 
-const GOTO = styled(Link)`
-display: flex;
-justify-content: center;
-text-decoration: none;
-padding: 8px;
-font-size: 30px;
-font-family: 'FROZEN ICE', sans-serif;
-color: white;
-`
+const Wrapper = styled.div``
 
-const Wrapper = styled.div`
 
-`
+
+export default Signin;
 
 
