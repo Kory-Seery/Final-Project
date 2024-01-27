@@ -2,7 +2,7 @@
 
 const express = require("express");
 const {
-    getAllchallenges,
+    getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion,
 } = require("./apihandlers");
 
 express()
@@ -11,7 +11,10 @@ express()
 
 
     .get("/challengelist", getAllchallenges)
-
+    .post("/createclient", createclient)
+    .get("/clientsignin", clientsignin)
+    .post("/createchallenge", createchallenge)
+    .post("/createSuggestion", createSuggestion)
 
     .get("*", (req, res) => {
         res.status(404).json({status: 404, message: "Not what your looking for!"});
