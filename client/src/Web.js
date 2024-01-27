@@ -9,7 +9,6 @@ const Web = () => {
 <ALL>
 
     <Section1>
-        <p>The list</p>
         <Countdown />
     </Section1>
 
@@ -38,7 +37,6 @@ height: 94vh;
 const Section1 = styled.div`
 width: 400px;
 background-color: lightgray;
-
 `
 
 const Section2 = styled.div`
