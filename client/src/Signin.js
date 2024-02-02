@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 
-const Signin = () => {
+const Signin = ({setcurrentuser}) => {
     const navigate = useNavigate()
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -19,6 +19,9 @@ const Signin = () => {
         body: JSON.stringify({ username, password }),
         });
         if (response.ok) {
+            const getdata = await fetch(`/getclient/${username}`)
+            const clientdata = await getdata.json()
+            setcurrentuser(clientdata)
         localStorage.setItem("currentUser", username);
         setErrorMessage(null);
         navigate("/Web")
