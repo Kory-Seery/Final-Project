@@ -6,18 +6,22 @@ import Globalstyles from "./Globalstyles";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import Web from "./Web"
-import Header from "./Header";
+import { useState } from "react";
+
 
 const App = () => {
+
+const [currentUser, setcurrentuser] = useState("")
+
+
   return (
   <BrowserRouter>
-  <Header />
   <Globalstyles/>
     <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/Signup" element={<Signup/>}/>
-        <Route path="/Signin" element={<Signin/>}/>
-        <Route path="/Web" element={<Web/>}/>
+        <Route path="/Signin" element={<Signin setcurrentuser={setcurrentuser}/>}/>
+        <Route path="/Web" element={<Web currentUser={currentUser} setcurrentuser={setcurrentuser}/>}/>
     </Routes>
   </BrowserRouter>
   );

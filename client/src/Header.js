@@ -1,26 +1,51 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 
-const Header = () => {
+const Header = ({setcurrentuser}) => {
+        const bringmeto = useNavigate()
+        const [isProfileOpen, setProfileOpen] = useState("false");
+        const [currentUser, setCurrentUser] = useState("")
+        useEffect(() => {
+            const storageuser = localStorage.getItem("currentUser")
+            console.log(storageuser)
+            setCurrentUser(storageuser)
+            
+            /* if (storageuser) {
+                const clientparsed = JSON.parse(storageuser)
+                setcurrentuser(clientparsed)
+            } */
+        },[])
 
-        const [isProfileOpen, setProfileOpen] = useState(false);
+
         const toggleDropdown = () => {
-            setProfileOpen(!isProfileOpen);
+            setProfileOpen("true");
         };
+
+        const closedropdown = () => {
+            setProfileOpen("false");
+        }
+
+        const toggleLogout = () => {
+            localStorage.removeItem("currentUser")
+            localStorage.removeItem("userId")
+            setcurrentuser(null)
+            bringmeto("/")
+        }
+
 
         return (
         <Everything>
         <Linkstoplaces>
-        <Homelink to="/">Home</Homelink>
         <ProfileDiv onClick={toggleDropdown}>Profile</ProfileDiv>
-                    <Dropdown isVisible={isProfileOpen}>
-                        <CloseButton onClick={toggleDropdown}> x </CloseButton>
+                    <Dropdown isvisible={isProfileOpen}>
+                        <CloseButton onClick={closedropdown}> x </CloseButton>
                 <SHOWUP>
                     <DIV>
-                        <WORDS>(username)'s Profile</WORDS>
+                        <WORDS>{currentUser}'s Profile</WORDS>
                     </DIV>
                     <WORDS>Hello User this where you find all your information</WORDS>
+                    <Homelink onClick={toggleLogout}>Log Out</Homelink>
                 </SHOWUP>
                 </Dropdown>
 </Linkstoplaces>
@@ -53,6 +78,7 @@ background-color: black;
 `
 
 const ProfileDiv = styled.div`
+margin-left: 95.5%;
 color: white;
 text-decoration: none;
 padding: 1%;
@@ -63,7 +89,7 @@ text-align: baseline;
 }
 `
 
-const Homelink = styled(Link)`
+const Homelink = styled.button`
 color: white;
 text-decoration: none;
 padding: 1%;
@@ -92,7 +118,7 @@ cursor: pointer;
 
 
 const Dropdown = styled.div`
-display: ${props => (props.isVisible ? 'block' : 'none')};
+display: ${(props) => (props.isvisible === "true" ? 'block' : 'none')};
 position: absolute;
 background-color: lightgray;
 border: 1px solid #ccc;

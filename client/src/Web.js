@@ -1,11 +1,14 @@
 import styled from "styled-components"
 import Countdown from "./Countdown";
+import Header from "./Header";
 
 
 
-
-const Web = () => {
+const Web = ({currentUser, setcurrentuser}) => {
     return (
+        <div>
+            <Header currentUser={currentUser} setcurrentuser={setcurrentuser}/>
+        
 <ALL>
 
     <Section1>
@@ -20,10 +23,11 @@ const Web = () => {
 
 
 </ALL>
+</div>
     )
 }
 
-export default Web;
+
 
 
 const ALL = styled.div`
@@ -42,3 +46,5 @@ background-color: lightgray;
 const Section2 = styled.div`
 
 `
+
+export default Web;
