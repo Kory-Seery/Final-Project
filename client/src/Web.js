@@ -9,9 +9,7 @@ const Web = ({ currentUser, setcurrentuser }) => {
     const [selectedDifficulty, setSelectedDifficulty] = useState("Easy");
 
     useEffect(() => {
-        fetchChallenges();
-    }, [selectedDifficulty]);
-
+        
     const fetchChallenges = async () => {
         try {
         const response = await fetch(`/challengelist`);
@@ -26,6 +24,10 @@ const Web = ({ currentUser, setcurrentuser }) => {
         console.error("Error fetching challenges", error);
         }
     };
+
+    fetchChallenges();
+}, [selectedDifficulty]);
+
 
     const handleDifficultyToggle = (difficulty) => {
         setSelectedDifficulty(difficulty === selectedDifficulty ? null : difficulty);

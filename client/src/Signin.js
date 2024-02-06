@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 
+
 const Signin = ({setcurrentuser}) => {
     const navigate = useNavigate()
     const [username, setUsername] = useState("");
@@ -66,7 +67,7 @@ const Signin = ({setcurrentuser}) => {
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <Footer>
             <div className="glow-on-hover" type="button">
-            <Buttonstyle type="reset">Clear</Buttonstyle>
+            <Buttonstyle to="/Signin" >Clear</Buttonstyle>
             </div>
             <div className="glow-on-hover" type="button">
             <Buttonstyle onClick={(event) => handleSignIn(event)}>Confirm</Buttonstyle>
