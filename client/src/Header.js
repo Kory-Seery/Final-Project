@@ -77,8 +77,12 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
         return (
         <Everything>
         <Linkstoplaces>
-        <Sendto to="/Recommend">Suggestions</Sendto>
+        
+        <Sendto to="/Web">Home</Sendto>
+        <Send to="/Recommend">Suggestions</Send>
+        
         <ProfileDiv onClick={toggleDropdown}>Profile</ProfileDiv>
+        
                     <Dropdown isvisible={isProfileOpen}>
                 <SHOWUP>
                 <Pro>
@@ -90,7 +94,7 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
             <ALL>
                 <PIC>
                 {selectedAvatar ? (
-                <img src={avatars.find(avatar => avatar.id === selectedAvatar)?.url} alt="User Avatar" />
+                <PROFILEPIC src={avatars.find(avatar => avatar.id === selectedAvatar)?.url} alt="User Avatar" />
             ) : (
                 <p>No avatar selected</p>
             )}
@@ -105,17 +109,31 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
             </ALL>
                 </SHOWUP>
                 </Dropdown>
-    
+                
 </Linkstoplaces>
 </Everything>
     )
 }
 
+const PROFILEPIC = styled.img`
+width: 100px;
+border-radius: 50%;
+`
 
+const Send = styled(Link)`
+color: white;
+text-decoration: none;
+padding: 1%;
+&:hover {
+    color: black;
+    background-color:skyblue;
+}
+`
 const Sendto = styled(Link)`
 color: white;
 text-decoration: none;
 padding: 1%;
+margin-left: 45%;
 &:hover {
     color: black;
     background-color:skyblue;
@@ -161,14 +179,15 @@ const Linkstoplaces = styled.div`
 display: flex;
 text-align: center;
 background-color: black;
+
 `
 
 const ProfileDiv = styled.div`
-margin-left: 80%;
 color: white;
 text-decoration: none;
 padding: 1%;
 text-align: baseline;
+margin-left: 40%;
 &:hover {
     color: black;
     background-color:skyblue;
