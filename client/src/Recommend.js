@@ -1,27 +1,50 @@
 import styled from "styled-components";
+import Header from "./Header";
 
 
 
-const Recommend = () => {
+const Recommend = (currentUser, setcurrentuser ) => {
     return (
+        <div>
+        <Header currentUser={currentUser} setcurrentuser={setcurrentuser} />
     <Wrapper>
         <div>
+
             <form>
             <FO>
         <div>
             <H1>SUGGESTION</H1>
         </div>
+    <SELECT>
+        <form>
+    <label>Difficulty:</label>
+    <select>
+        <option>Select one</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+        <option>Extreme</option>
+    </select>
+</form>
+<Time>
+<form>
+    <label>Time:</label>
+    <select>
+        <option>Select one</option>
+        <option>2-5 minutes</option>
+        <option>30 minutes - 1 hour</option>
+        <option>1-2 hours</option>
+        <option>3 - 24 hours</option>
+    </select>
+</form>
+</Time>
+</SELECT>
     <TEXT>
-        <div>
-            <p>
-            Suggestion:{" "}
-            <input
-                type="text"
-            />
-            </p>
-        </div>
+        <form>
+            <H3>Suggestion:</H3>
+            <INPUT rows="4" cols="60" placeholder="provide special instructions for the challenge here"/>
+        </form>
     </TEXT>
-
     <Footer>
             <div className="glow-on-hover" type="button">
             <Bu to="/Recommend" >Clear</Bu>
@@ -32,11 +55,29 @@ const Recommend = () => {
         </Footer>
     </FO>
     </form>
-        </div>
+        </div>  
     </Wrapper>
+    </div>
     )
 }
 
+const H3 = styled.h3`
+margin: 5px;
+`
+
+const INPUT = styled.textarea`
+width: 50%;
+padding-bottom: 120px;
+`
+
+const Time = styled.div`
+margin-left: 20px;
+`
+
+const SELECT = styled.div`
+display: flex;
+justify-content: center;
+`
 
 const Footer = styled.footer`
     display: flex;
@@ -85,7 +126,7 @@ background-color: white;
 
 const Wrapper = styled.div`
 background: #222;
-height: 93.4vh;
+height: 87.4vh;
 padding-top: 60px;
 `
 
