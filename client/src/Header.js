@@ -33,7 +33,7 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
         const toggleLogout = () => {
             localStorage.removeItem("currentUser")
             localStorage.removeItem("userId")
-            setcurrentuser(null)
+            setCurrentUser(null)
             bringmeto("/")
         }
 
