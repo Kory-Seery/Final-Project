@@ -23,7 +23,7 @@ const [currentUser, setcurrentuser] = useState("")
         <Route path="/Signup" element={<Signup/>}/>
         <Route path="/Signin" element={<Signin setcurrentuser={setcurrentuser}/>}/>
         <Route path="/Web" element={<Web currentUser={currentUser} setcurrentuser={setcurrentuser}/>}/>
-        <Route path="/Recommend" element={<Recommend/>}/>
+        <Route path="/Recommend" element={<Recommend currentUser={currentUser}/>}/>
     </Routes>
   </BrowserRouter>
   );

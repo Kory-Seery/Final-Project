@@ -45,7 +45,7 @@ const Signin = ({setcurrentuser}) => {
     <TEXT>
         <NICK>
             <p>
-            Nickname:{" "}
+            Username:{" "}
             <input
                 type="text"
                 id="username"

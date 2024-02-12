@@ -1,9 +1,18 @@
 import styled from "styled-components";
 import Header from "./Header";
+import {useState, useEffect} from "react";
 
 
+const Recommend = ({setcurrentuser} ) => {
+    const [currentUser, setCurrentUser] = useState("");
+    useEffect(() => {
+        const storageuser = localStorage.getItem("currentUser")
+        console.log(storageuser)
+        setCurrentUser(storageuser)
 
-const Recommend = (currentUser, setcurrentuser ) => {
+    },[])
+
+
     return (
         <div>
         <Header currentUser={currentUser} setcurrentuser={setcurrentuser} />
@@ -15,6 +24,11 @@ const Recommend = (currentUser, setcurrentuser ) => {
         <div>
             <H1>SUGGESTION</H1>
         </div>
+        <TEXT>
+        <NICK>
+            <H3>{currentUser}</H3>
+        </NICK>
+        </TEXT>
     <SELECT>
         <form>
     <label>Difficulty:</label>
@@ -60,6 +74,9 @@ const Recommend = (currentUser, setcurrentuser ) => {
     </div>
     )
 }
+
+const NICK = styled.div`
+`
 
 const H3 = styled.h3`
 margin: 5px;
@@ -110,7 +127,7 @@ const Bu = styled(BUTTON)`
 `
 
 const H1 = styled.h1`
-margin-bottom: 40px;
+margin-bottom: 10px;
 `
 
 const FO = styled.div`
@@ -120,7 +137,7 @@ box-shadow:  0px 0px 50px 5px lightblue;
 padding: 20px;
 text-align: center;
 margin: 100px;
-height: 50vh;
+height: 53vh;
 background-color: white;
 `
 
