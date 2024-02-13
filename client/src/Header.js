@@ -77,12 +77,12 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
         return (
         <Everything>
         <Linkstoplaces>
-        
+        <Headerlist>
         <Sendto to="/Web">Home</Sendto>
         <Send to="/Recommend">Suggestions</Send>
         
         <ProfileDiv onClick={toggleDropdown}>Profile</ProfileDiv>
-        
+        </Headerlist>
                     <Dropdown isvisible={isProfileOpen}>
                 <SHOWUP>
                 <Pro>
@@ -115,6 +115,13 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
     )
 }
 
+
+const Headerlist = styled.div`
+display: flex;
+justify-content: space-between;
+width: 100%;
+`
+
 const PROFILEPIC = styled.img`
 width: 100px;
 border-radius: 50%;
@@ -133,7 +140,6 @@ const Sendto = styled(Link)`
 color: white;
 text-decoration: none;
 padding: 1%;
-margin-left: 45%;
 &:hover {
     color: black;
     background-color:skyblue;
@@ -187,7 +193,7 @@ color: white;
 text-decoration: none;
 padding: 1%;
 text-align: baseline;
-margin-left: 40%;
+justify-content: space-between;
 &:hover {
     color: black;
     background-color:skyblue;
