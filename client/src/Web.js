@@ -30,8 +30,13 @@ const Web = ({ currentUser, setcurrentuser }) => {
 
 
     const handleDifficultyToggle = (difficulty) => {
-        setSelectedDifficulty(difficulty === selectedDifficulty ? null : difficulty);
+        setSelectedDifficulty(difficulty)
     };
+
+    const filteredChallenges = challenges.filter(
+        (challenge) => challenge.type === selectedDifficulty
+    )
+
 
     return (
         <div>
@@ -42,20 +47,77 @@ const Web = ({ currentUser, setcurrentuser }) => {
         <Section1>
             <Countdown />
             <DifficultyButtons>
-            <button onClick={() => handleDifficultyToggle("Easy")}>Easy</button>
-            <button onClick={() => handleDifficultyToggle("Medium")}>Medium</button>
-            <button onClick={() => handleDifficultyToggle("Hard")}>Hard</button>
-            <button onClick={() => handleDifficultyToggle("Extreme")}>Extreme</button>
-            </DifficultyButtons>
-            <ul>
-                {challenges.map((challenge) => (
+
+            <div>
+            <Colorful className="glow-on-hover" type="button">
+            <ButtonDifsmall onClick={() => handleDifficultyToggle("Easy")}>Easy</ButtonDifsmall>
+            </Colorful>
+            {selectedDifficulty === "Easy" && (
+            <CHALL>
+            <UL>
+                {filteredChallenges.map((challenge) => (
                 <List key={challenge._id}>
                     {challenge.challenge} - {challenge.type}
-
                     </List>
                 ))}
-            </ul>
+            </UL>
+        </CHALL>
+        )}
+            </div>
 
+
+            <div>
+            <Colorful className="glow-on-hover" type="button">
+            <ButtonDif onClick={() => handleDifficultyToggle("Medium")}>Medium</ButtonDif>
+            </Colorful>
+            {selectedDifficulty === "Medium" && (
+            <CHALL>
+            <UL>
+                {filteredChallenges.map((challenge) => (
+                <List key={challenge._id}>
+                    {challenge.challenge} - {challenge.type}
+                    </List>
+                ))}
+            </UL>
+        </CHALL>
+        )}        
+            </div>
+
+            <div>
+            <Colorful className="glow-on-hover" type="button">
+            <ButtonDifsmall onClick={() => handleDifficultyToggle("Hard")}>Hard</ButtonDifsmall>
+            </Colorful>
+            {selectedDifficulty === "Hard" && (
+            <CHALL>
+            <UL>
+                {filteredChallenges.map((challenge) => (
+                <List key={challenge._id}>
+                    {challenge.challenge} - {challenge.type}
+                    </List>
+                ))}
+            </UL>
+        </CHALL>
+        )}
+            </div>
+
+            <div>
+            <Colorful className="glow-on-hover" type="button">
+            <ButtonDif onClick={() => handleDifficultyToggle("Extreme")}>Extreme</ButtonDif>
+            </Colorful>
+            {selectedDifficulty === "Extreme" && (
+            <CHALL>
+            <UL>
+                {filteredChallenges.map((challenge) => (
+                <List key={challenge._id}>
+                    {challenge.challenge} - {challenge.type}
+                    </List>
+                ))}
+            </UL>
+        </CHALL>
+        )}
+            </div>
+
+            </DifficultyButtons>
             </Section1>
 
             <Section2>
@@ -64,10 +126,48 @@ const Web = ({ currentUser, setcurrentuser }) => {
         </ALL>
         </div>
     );
-                };
+};
+
+
+const Colorful = styled.div`
+padding-right: 130px;
+`
+
 
 const DifficultyButtons = styled.div`
+text-align: center;
+max-height: 700px;
+overflow-y: auto;
+scrollbar-width: thin;
+scrollbar-color: white black;
+`
 
+const CHALL = styled.div`
+
+`
+
+const UL = styled.ul`
+margin-left: 80px;
+`
+
+const ButtonDifsmall = styled.button`
+border: 2px solid white;
+padding: 15px;
+padding-left: 159px;
+padding-right: 158px;
+color: white;
+background-color: transparent;
+cursor: pointer;
+`
+
+const ButtonDif = styled.button`
+border: 2px solid white;
+padding: 15px;
+padding-left: 150px;
+padding-right: 150px;
+color: white;
+background-color: transparent;
+cursor: pointer;
 `
 
 const ALL = styled.div`
@@ -82,6 +182,7 @@ border: 2px solid black;
 border-radius: 20px ;
 width: 200px; 
 text-align: center;
+margin: 5px;
 `
 
 const Section1 = styled.div`

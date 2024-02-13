@@ -1,79 +1,107 @@
 import styled from "styled-components";
 import Header from "./Header";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
+const Recommend = ({ setcurrentuser }) => {
+const [currentUser, setCurrentUser] = useState("");
+useEffect(() => {
+    const storageuser = localStorage.getItem("currentUser");
+    console.log(storageuser);
+    setCurrentUser(storageuser);
+}, []);
 
-const Recommend = ({setcurrentuser} ) => {
-    const [currentUser, setCurrentUser] = useState("");
-    useEffect(() => {
-        const storageuser = localStorage.getItem("currentUser")
-        console.log(storageuser)
-        setCurrentUser(storageuser)
+const handleSuggestion = async (event) => {
+    event.preventDefault();
+    try {
+        const difficulty = document.querySelector("#difficulty").value;
+        const time = document.querySelector("#time").value;
+        const suggestionText = document.querySelector("#suggestionText").value;
 
-    },[])
+        const res = await fetch(`/createSuggestion`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            currentUser,
+            difficulty,
+            time,
+            suggestionText,
+        }),
+        });
+
+        if (res.ok) {
+            document.querySelector("#difficulty").value = "";
+            document.querySelector("#time").value = "";
+            document.querySelector("#suggestionText").value = "";
+
+            console.log("Suggestion submitted successfully");
+        } else {
+        console.log("Error Sending Suggestion");
+        }
+    } catch (error) {
+        console.error("Error with Suggestion:", error);
+    }
+    };
+
 
 
     return (
         <div>
         <Header currentUser={currentUser} setcurrentuser={setcurrentuser} />
-    <Wrapper>
-        <div>
-
-            <form>
-            <FO>
-        <div>
-            <H1>SUGGESTION</H1>
+        <Wrapper>
+            <div>
+            <form onSubmit={handleSuggestion}>
+                <FO>
+                <div>
+                    <H1>SUGGESTION</H1>
+                </div>
+                <TEXT>
+                    <NICK>
+                    <H3 value={currentUser}>Username: {currentUser}</H3>
+                    </NICK>
+                </TEXT>
+                <SELECT>
+                    <label htmlFor="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                    <option value="">Select one</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                        <option value="Extreme">Extreme</option>
+                    </select>
+                    <Time>
+                    <label htmlFor="time">Time:</label>
+                    <select id="time">
+                        <option value="">Select one</option>
+                        <option value="2-5 minutes">2-5 minutes</option>
+                        <option value="30 minutes - 1 hour">30 minutes - 1 hour</option>
+                        <option value="1-2 hours">1-2 hours</option>
+                        <option value="3 - 24 hours">3 - 24 hours</option>
+                    </select>
+                </Time>
+                </SELECT>
+                <TEXT>
+                    <form>    
+                <H3 htmlFor="suggestionText">Suggestion:</H3>
+                <INPUT id="suggestionText" rows="4" cols="60" placeholder="provide special instructions for the challenge here"></INPUT>
+                    </form>
+                    </TEXT>
+                    <Footer>
+                <div className="glow-on-hover" type="button">
+                    <Bu to="/Recommend">Clear</Bu>
+                </div>
+                <div className="glow-on-hover" type="button">
+                    <Buttonstyle type="submit">Confirm</Buttonstyle>
+                </div>
+                </Footer>
+            </FO>
+            </form>
         </div>
-        <TEXT>
-        <NICK>
-            <H3>{currentUser}</H3>
-        </NICK>
-        </TEXT>
-    <SELECT>
-        <form>
-    <label>Difficulty:</label>
-    <select>
-        <option>Select one</option>
-        <option>Easy</option>
-        <option>Medium</option>
-        <option>Hard</option>
-        <option>Extreme</option>
-    </select>
-</form>
-<Time>
-<form>
-    <label>Time:</label>
-    <select>
-        <option>Select one</option>
-        <option>2-5 minutes</option>
-        <option>30 minutes - 1 hour</option>
-        <option>1-2 hours</option>
-        <option>3 - 24 hours</option>
-    </select>
-</form>
-</Time>
-</SELECT>
-    <TEXT>
-        <form>
-            <H3>Suggestion:</H3>
-            <INPUT rows="4" cols="60" placeholder="provide special instructions for the challenge here"/>
-        </form>
-    </TEXT>
-    <Footer>
-            <div className="glow-on-hover" type="button">
-            <Bu to="/Recommend" >Clear</Bu>
-            </div>
-            <div className="glow-on-hover" type="button">
-            <Buttonstyle>Confirm</Buttonstyle>
-            </div>
-        </Footer>
-    </FO>
-    </form>
-        </div>  
-    </Wrapper>
+        </Wrapper>
     </div>
-    )
-}
+    );
+};
 
 const NICK = styled.div`
 `
