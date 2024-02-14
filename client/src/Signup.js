@@ -12,7 +12,7 @@ const [password, setPassword] = useState("");
 const [email, setEmail] = useState("");
 const [fullname, setFullName] = useState("");
 
-
+const [showhiddenpass, setShowHiddenPass] = useState(true)
 
 
     const handleSignUp = async (event) => {
@@ -43,6 +43,16 @@ const [fullname, setFullName] = useState("");
             console.error("Error during sign-up:", error);
         }
     };
+
+    const ShowHiddenPass = (event) => {
+        event.preventDefault()
+        
+        if (showhiddenpass === true) {
+            setShowHiddenPass(false) 
+        } else {
+            setShowHiddenPass(true)
+        }
+    }
 
 
     return (
@@ -94,12 +104,14 @@ const [fullname, setFullName] = useState("");
             <p>
             Password:{" "}
             <input
-                type="password"
+                type= {showhiddenpass ? "password" : "text"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            <EYE onClick={(event) => ShowHiddenPass(event)}>👁️</EYE>
             </p>
+            
         </PASS>
     </TEXT>
             </div>
@@ -123,6 +135,12 @@ const [fullname, setFullName] = useState("");
 }
 
 export default Signup
+
+const EYE = styled.button`
+cursor: pointer;
+background-color: #ccc;
+border: 2px solid black;
+`
 
 const BUTTON = styled.button`
     display: flex;

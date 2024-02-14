@@ -3,10 +3,19 @@ import Countdown from "./Countdown";
 import Header from "./Header";
 import Chat from "./Chat";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Web = ({ currentUser, setcurrentuser }) => {
     const [challenges, setChallenges] = useState([]);
     const [selectedDifficulty, setSelectedDifficulty] = useState("Easy");
+    const bringmeto = useNavigate("")
+
+    useEffect(() => {
+        const currentUser = localStorage.getItem('currentUser')
+        if (!currentUser) {
+            bringmeto('/Signin')
+        }
+        }, [bringmeto])
 
     useEffect(() => {
         

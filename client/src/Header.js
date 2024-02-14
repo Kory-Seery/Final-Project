@@ -73,6 +73,25 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
         }, [currentUser]);
     
 
+        const deleteClientfrontend = async () => {
+            try{
+                const res = await fetch(`/deleteClient/${currentUser}`, {
+                    method: "DELETE"   
+                })
+
+                const result = await res.json()
+                if(res.ok) {
+                    localStorage.removeItem("currentUser")
+                    bringmeto("/")
+                    console.log("Account deleted!")
+                    console.log(result)
+                } else {
+                    console.log(currentUser)
+                }
+            } catch (error) {
+                console.error("Error deleting account", error)
+            }
+        }
 
         return (
         <Everything>
@@ -106,6 +125,7 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
         </div>
                     <WORDS>Hello User this where you find all your information</WORDS>
                     <Homelink onClick={toggleLogout}>Log Out</Homelink>
+                    <Homelink onClick={deleteClientfrontend}>DELETE ACCOUNT</Homelink>
             </ALL>
                 </SHOWUP>
                 </Dropdown>
