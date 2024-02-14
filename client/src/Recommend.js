@@ -1,9 +1,19 @@
 import styled from "styled-components";
 import Header from "./Header";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Recommend = ({ setcurrentuser }) => {
 const [currentUser, setCurrentUser] = useState("");
+const bringmeto = useNavigate("")
+
+useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser')
+    if (!currentUser) {
+        bringmeto('/Signin')
+    }
+    }, [bringmeto])
+
 useEffect(() => {
     const storageuser = localStorage.getItem("currentUser");
     console.log(storageuser);
