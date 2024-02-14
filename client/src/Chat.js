@@ -22,8 +22,7 @@ const Chat = () => {
     hey: "Hi there! How can I help you?",
     "how are you": "I'm just a computer program, but I'm doing well. How about you?",
     bye: "Goodbye! Have a great day.",
-    challenge: `today's challenge is: `,
-    help: "Here are some words I know: "
+    help: "Here are some words I know: challenge, hi, hey, how are you, "
     // Add more responses as needed
   };
 
@@ -46,21 +45,27 @@ const Chat = () => {
       return;
     }
 
-    const response = responseMapping[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. To know what to ask for say: help";
 
-    setTimeout(() => {
-      const botMessage = { type: 'bot', content: response };
-      setChatHistory((prevHistory) => [...prevHistory, botMessage]);
-    }, getRandomDelay());
+  if (userInput.toLowerCase() === 'challenge') {
+  
+  } 
 
-    setUserInput('');
-  };
+  const response = responseMapping[userInput.toLowerCase()] || "I'm sorry, I didn't understand that. To know what to ask for say: help";
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      handleSendMessage();
-    }
-  };
+
+  setTimeout(() => {
+    const botMessage = { type: 'bot', content: response };
+    setChatHistory((prevHistory) => [...prevHistory, botMessage]);
+  }, getRandomDelay());
+
+  setUserInput('');
+};
+
+const handleKeyPress = (event) => {
+  if (event.key === 'Enter') {
+    handleSendMessage();
+  }
+};
 
   return (
     <div> 
