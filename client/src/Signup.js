@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { useNavigate } from "react-router"
+import {Link, useNavigate } from "react-router-dom"
 import React, {useState} from "react";
-import AvatarSelector from "./AvatarSelector";
+
 
 
 const Signup = () => {
-const [avatarId, setAvatarId] = useState(null)
+
 const navigate = useNavigate();
 const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
@@ -115,10 +115,7 @@ const [showhiddenpass, setShowHiddenPass] = useState(true)
         </PASS>
     </TEXT>
             </div>
-            <div>
-            <p>Select Avatar:</p>
-            <AvatarSelector onSelect={setAvatarId} />
-            </div>
+
         <Footer>
         <div className="glow-on-hover" type="button">
             <Bu to="/Signup" >Clear</Bu>
@@ -129,12 +126,20 @@ const [showhiddenpass, setShowHiddenPass] = useState(true)
         </Footer>
             </FO>
         </form>
+        <LinkTO to="/">Go Back To Home Page</LinkTO>
     </div>
     </Wrapper>
     );
 }
 
 export default Signup
+
+
+const LinkTO = styled(Link)`
+display: flex;
+justify-content: center;
+margin-top: -150px;
+`
 
 const EYE = styled.button`
 cursor: pointer;
@@ -166,10 +171,11 @@ const Bu = styled(BUTTON)`
 `
 
 const Footer = styled.footer`
-    display: flex;
+        display: flex;
     justify-content: center;
-    margin-left: 31%;
-    position: absolute;
+    text-align: center;
+    margin: auto;
+    
 `
 
 const TEXT = styled.div`
@@ -207,4 +213,5 @@ const Wrapper = styled.div`
 background: #222;
 height: 93.4vh;
 padding-top: 60px;
+min-width: 700px;
 `

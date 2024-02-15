@@ -2,19 +2,26 @@
 
 const express = require("express");
 const {
-    getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion,
+    getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion, getclient, updateAvatar, deleteSuggestion, deleteChallenge, deleteClient, fetchRandomChallenge, getDailyChallenge, 
 } = require("./apihandlers");
 
 express()
     .use(express.json())
     .use(express.static("public"))
 
-
     .get("/challengelist", getAllchallenges)
+    .get("/getclient/:id", getclient)
     .post("/createclient", createclient)
-    .get("/clientsignin", clientsignin)
+    .post("/clientsignin", clientsignin)
     .post("/createchallenge", createchallenge)
     .post("/createSuggestion", createSuggestion)
+    .post("/updateAvatar", updateAvatar)
+    .delete("/deleteSuggestion/:suggestionId", deleteSuggestion)
+    .delete("/deleteChallenge/:challengeId", deleteChallenge)
+    .delete("/deleteClient/:clientusername", deleteClient)
+    .get("/fetchrandomchallenge", fetchRandomChallenge)
+    .get("/dailychallenge", getDailyChallenge)
+
 
     .get("*", (req, res) => {
         res.status(404).json({status: 404, message: "Not what your looking for!"});

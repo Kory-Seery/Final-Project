@@ -7,6 +7,7 @@ const AvatarSelector = ({ onSelect }) => {
 
     const handleAvatarClick = (avatar) => {
     setSelectedAvatar(avatar);
+    localStorage.setItem("Mood", avatar.id);
     onSelect(avatar.id);
     };
 
