@@ -28,7 +28,6 @@ const challenges = [
 
 
 
-
 {
     type: "Medium",
     challenge: "eat the spiciest thing you have",

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import {useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 
 const Signin = ({setcurrentuser}) => {
@@ -8,6 +8,8 @@ const Signin = ({setcurrentuser}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(false);
+
+    const [showhiddenpass, setShowHiddenPass] = useState(true)
 
     const handleSignIn = async (event) => {
         event.preventDefault()
@@ -34,6 +36,17 @@ const Signin = ({setcurrentuser}) => {
     }
     };
 
+    const ShowHiddenPass = (event) => {
+        event.preventDefault()
+        
+        if (showhiddenpass === true) {
+            setShowHiddenPass(false) 
+        } else {
+            setShowHiddenPass(true)
+        }
+    }
+
+
     return (
     <Wrapper>
         <div>
@@ -58,11 +71,12 @@ const Signin = ({setcurrentuser}) => {
             <p>
             Password:{" "}
             <input
-                type="password"
+                type= {showhiddenpass ? "password" : "text"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            <EYE onClick={(event) => ShowHiddenPass(event)}>👁️</EYE>
             </p>
         </PASS>
     </TEXT>
@@ -76,14 +90,30 @@ const Signin = ({setcurrentuser}) => {
             <div className="glow-on-hover" type="button">
             <Buttonstyle onClick={(event) => handleSignIn(event)}>Confirm</Buttonstyle>
             </div>
+            
         </Footer>
+        
+        
         </FO >
+        
         </form>
+        <LinkTO to="/">Go Back To Home Page</LinkTO>
     </div> 
     </Wrapper>
     );
 };
 
+const LinkTO = styled(Link)`
+display: flex;
+justify-content: center;
+margin-top: -150px;
+`
+
+const EYE = styled.button`
+cursor: pointer;
+background-color: #ccc;
+border: 2px solid black;
+`
 
 const DIVERR = styled.div`
 margin: 50px;
@@ -154,14 +184,16 @@ const Bu = styled(BUTTON)`
 const Footer = styled.footer`
     display: flex;
     justify-content: center;
-    margin-left: 31%;
-    position: absolute;
+    text-align: center;
+    margin: auto;
+    
 `
 
 const Wrapper = styled.div`
 background: #222;
 height: 93.4vh;
 padding-top: 60px;
+min-width: 700px;
 `
 
 export default Signin;

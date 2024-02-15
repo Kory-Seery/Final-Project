@@ -5,16 +5,19 @@ import { Link } from "react-router-dom"
 import AvatarSelector from "./AvatarSelector";
 import avatars from "./Avatars";
 
-const Header = ({setcurrentuser, onUpdateAvatar}) => {
+const Header = ({setcurrentuser}) => {
         const bringmeto = useNavigate()
+        const [currentmood, setCurrentMood] = useState("")
         const [isProfileOpen, setProfileOpen] = useState("false");
         const [currentUser, setCurrentUser] = useState("")
-        const [newAvatarId, setNewAvatarId] = useState("")
+        
         const [selectedAvatar, setSelectedAvatar] = useState(null);
         useEffect(() => {
             const storageuser = localStorage.getItem("currentUser")
+            const Mooduser = localStorage.getItem("Mood")
             console.log(storageuser)
             setCurrentUser(storageuser)
+            setCurrentMood(Mooduser)
             
             /* if (storageuser) {
                 const clientparsed = JSON.parse(storageuser)
@@ -37,40 +40,12 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
             bringmeto("/")
         }
 
-        const handleUpdateAvatar = async () => {
-            try {
-                console.log("newAvatarId before API call:", newAvatarId);
-                console.log("currentUser before API call:", currentUser);
-        
-                const response = await fetch("/updateAvatar", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        username: currentUser,
-                        avatarId: newAvatarId,
-                    }),
-                });
-        
-                if (response.ok) {
-                    console.log("Avatar updated successfully!");
-                    
-                    setNewAvatarId(newAvatarId);
-                console.log("newAvatarId after API call:", newAvatarId);
-                console.log("currentUser after API call:", currentUser);
-                } else {
-                    const errorResponse = await response.json();
-                    console.error("Failed to update avatar:", response.status, errorResponse);
-                }
-            } catch (error) {
-                console.error("Error updating avatar:", error);
-            }
-        };
+
 
         useEffect(() => {
             setSelectedAvatar(currentUser.avatarId);
-        }, [currentUser]);
+            setSelectedAvatar(currentmood)
+        }, [currentUser, currentmood]);
     
 
         const deleteClientfrontend = async () => {
@@ -113,19 +88,26 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
             <ALL>
                 <PIC>
                 {selectedAvatar ? (
-                <PROFILEPIC src={avatars.find(avatar => avatar.id === selectedAvatar)?.url} alt="User Avatar" />
+                <PROFILEPIC src={avatars.find(avatar => avatar.id === selectedAvatar)?.url} alt="User Mood" />
             ) : (
-                <p>No avatar selected</p>
+                <p>No Mood Selected</p>
             )}
                 </PIC>
         <div>
-            <p>Select New Avatar:</p>
+            <Moodselect>Select New Mood:</Moodselect>
             <AvatarSelector onSelect={setSelectedAvatar} />
-            <button onClick={handleUpdateAvatar}>Update Avatar</button>
+            
         </div>
-                    <WORDS>Hello User this where you find all your information</WORDS>
-                    <Homelink onClick={toggleLogout}>Log Out</Homelink>
-                    <Homelink onClick={deleteClientfrontend}>DELETE ACCOUNT</Homelink>
+                    <WORDS>Hello {currentUser} this where you will find all your information.</WORDS>
+                    <WORDS>make sure to leave a challenge Suggestion for possible future challenges</WORDS>
+                <BOTTOM>
+                    <DIVDEL>
+                    <DELETE onClick={deleteClientfrontend}>DELETE ACCOUNT</DELETE>
+                    </DIVDEL>
+                    <DIVLOG>
+                    <Homelink onClick={toggleLogout}>LOG OUT</Homelink>
+                    </DIVLOG>
+                </BOTTOM> 
             </ALL>
                 </SHOWUP>
                 </Dropdown>
@@ -136,6 +118,39 @@ const Header = ({setcurrentuser, onUpdateAvatar}) => {
 }
 
 
+const Moodselect = styled.p`
+margin-top: 10px;
+color: black;
+`
+
+const DIVLOG = styled.div`
+
+`
+
+const DIVDEL = styled.div`
+
+`
+
+const BOTTOM = styled.div`
+display: flex;
+justify-content: space-between;
+margin: 10px;
+`
+
+const DELETE = styled.button`
+color: black;
+text-decoration: none;
+padding: 1%;
+margin: auto;
+margin-top: 15px;
+text-align: center;
+&:hover {
+    color: black;
+    font-weight: bold;
+    background-color:red;
+}
+`
+
 const Headerlist = styled.div`
 display: flex;
 justify-content: space-between;
@@ -143,8 +158,10 @@ width: 100%;
 `
 
 const PROFILEPIC = styled.img`
+margin-top: 10px;
 width: 100px;
 border-radius: 50%;
+
 `
 
 const Send = styled(Link)`
@@ -176,6 +193,7 @@ const PIC = styled.div`
 const Everything = styled.div`
 width: 100%;
 z-index: 200;
+
 `
 
 const Pro = styled.div`
@@ -199,6 +217,7 @@ border-color: black;
 const SHOWUP = styled.div`
 font-size: 15px;
 float: left;
+width: 450px;
 `
 
 const Linkstoplaces = styled.div`
@@ -223,7 +242,8 @@ justify-content: space-between;
 const Homelink = styled.button`
 color: black;
 text-decoration: none;
-padding: 1%;
+width: 100px;
+padding: 9%;
 margin: auto;
 margin-top: 15px;
 text-align: center;
