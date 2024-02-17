@@ -2,13 +2,13 @@
 
 const express = require("express");
 const {
-    getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion, getclient, updateAvatar, deleteSuggestion, deleteChallenge, deleteClient, fetchRandomChallenge, getDailyChallenge, 
+    getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion, getclient, updateAvatar, deleteSuggestion, deleteChallenge, deleteClient, fetchRandomChallenge, getDailyChallenge, modifyChallenge
 } = require("./apihandlers");
 
 express()
     .use(express.json())
     .use(express.static("public"))
-
+    .patch("/challenges/:id", modifyChallenge)
     .get("/challengelist", getAllchallenges)
     .get("/getclient/:id", getclient)
     .post("/createclient", createclient)

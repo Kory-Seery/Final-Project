@@ -304,4 +304,30 @@ const clientsignin = async (req, res) => {
             };
 
 
-module.exports = {getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion, getclient, updateAvatar, deleteSuggestion, deleteChallenge, deleteClient,fetchRandomChallenge,getDailyChallenge};
+            const modifyChallenge = async (req, res) => {
+                let user;
+                const { id } = req.params;
+                const { challenge } = req.body
+                try {
+                    user = await MongoClient.connect(MONGO_URI, check);
+                    const database = user.db("Chillz");
+                    const challengesMongo = database.collection("challenges");
+                    const result = await challengesMongo.findOneAndUpdate(
+                        { _id: ObjectId(id) },
+                        { $set: { challenge } }, 
+                        { returnOriginal: false } 
+                    );
+                    if (result.value) {
+                        res.json(result.value);
+                        console.log("Challenge was updated!");
+                    } else {
+                        res.status(404).json({ message: "Challenge not found" });
+                    }
+                } catch (error) {
+                    res.status(500).json({ message: "Internal server error" });
+                } finally {
+                    user.close();
+                }
+            }
+
+module.exports = {getAllchallenges, createclient, clientsignin, createchallenge, createSuggestion, getclient, updateAvatar, deleteSuggestion, deleteChallenge, deleteClient, fetchRandomChallenge, getDailyChallenge, modifyChallenge };
