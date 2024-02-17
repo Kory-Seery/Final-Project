@@ -45,7 +45,6 @@ font-size: 72px;
 background: -webkit-linear-gradient(90deg, rgba(58,112,185,1) 11%, rgba(93,175,217,1) 79%, rgba(130,229,255,1) 97%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
-
 }
 
 
@@ -61,6 +60,7 @@ background: -webkit-linear-gradient(90deg, rgba(58,112,185,1) 11%, rgba(93,175,2
     background: #000;
 }
 .glow-on-hover {
+    margin: 20px;
     width: 220px;
     height: 50px;
     border: none;
@@ -72,10 +72,9 @@ background: -webkit-linear-gradient(90deg, rgba(58,112,185,1) 11%, rgba(93,175,2
     z-index: 0;
     border-radius: 10px;
 }
-
 .glow-on-hover:before {
     content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background: linear-gradient(90deg, rgba(82,137,207,1) 0%, rgba(74,182,200,1) 12%, rgba(82,137,207,1) 25%, rgba(74,182,200,1) 50%, rgba(82,137,207,1) 75%, rgba(74,182,200,1) 87%, rgba(82,137,207,1) 100%);
     position: absolute;
     top: -2px;
     left:-2px;
@@ -89,19 +88,15 @@ background: -webkit-linear-gradient(90deg, rgba(58,112,185,1) 11%, rgba(93,175,2
     transition: opacity .3s ease-in-out;
     border-radius: 10px;
 }
-
 .glow-on-hover:active {
     color: #000
 }
-
 .glow-on-hover:active:after {
     background: transparent;
 }
-
 .glow-on-hover:hover:before {
     opacity: 1;
 }
-
 .glow-on-hover:after {
     z-index: -1;
     content: '';
@@ -113,7 +108,6 @@ background: -webkit-linear-gradient(90deg, rgba(58,112,185,1) 11%, rgba(93,175,2
     top: 0;
     border-radius: 10px;
 }
-
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
